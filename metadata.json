@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: BrokHomeTV",
+  "description": "Une plateforme premium de visionnage synchronisé avec une interface inspirée de Netflix, des permissions multi-rôles et une lecture vidéo synchronisée.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
