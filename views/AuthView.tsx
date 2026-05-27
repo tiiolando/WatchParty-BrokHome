@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { User } from '../types';
+import { useTranslation } from '../useTranslation';
 
 interface AuthViewProps {
   onLogin: (user: User) => void;
@@ -12,6 +13,7 @@ const diceBearStyles = [
 ];
 
 export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
+  const { t } = useTranslation();
   const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -82,7 +84,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
       </div>
 
       <div className="relative z-10 w-full max-w-[450px] p-6 sm:p-16 bg-black/75 rounded-md shadow-2xl">
-        <h2 className="text-3xl font-bold mb-8 text-white">{isRegistering ? 'S\'inscrire' : 'S\'identifier'}</h2>
+        <h2 className="text-3xl font-bold mb-8 text-white">{isRegistering ? t.auth.register : t.auth.login}</h2>
         
         {error && <div className="bg-red-600/20 text-red-500 p-3 rounded mb-6 text-sm border border-red-600/50">{error}</div>}
 
@@ -90,7 +92,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
           <div className="relative">
             <input 
               type="text" 
-              placeholder="Nom d'utilisateur"
+              placeholder={t.auth.username}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full bg-[#333] border-none rounded p-4 text-white focus:bg-[#444] outline-none transition-all text-sm"
@@ -99,7 +101,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
           <div className="relative">
             <input 
               type="password" 
-              placeholder="Mot de passe"
+              placeholder={t.auth.password}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-[#333] border-none rounded p-4 text-white focus:bg-[#444] outline-none transition-all text-sm"
@@ -111,7 +113,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
             disabled={isLoading}
             className="w-full bg-[#e50914] py-4 rounded font-bold text-lg hover:bg-[#b20710] disabled:opacity-50 transition-colors shadow-lg uppercase"
           >
-            {isLoading ? 'Chargement...' : (isRegistering ? 'Rejoindre l\'aventure' : 'Commencer à regarder')}
+            {isLoading ? t.global.loading : (isRegistering ? t.auth.joinAdventure : t.auth.startWatching)}
           </button>
           
           {!isRegistering && (
@@ -121,18 +123,18 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin }) => {
               onClick={handleGuestLogin}
               className="w-full mt-3 bg-transparent border-2 border-white/10 hover:border-white/25 hover:bg-white/[0.02] text-white py-3.5 rounded font-black text-[10px] tracking-widest uppercase transition-all flex items-center justify-center gap-2 italic"
             >
-              🎭 Continuer en tant qu'invité
+              🎭 {t.auth.continueGuest}
             </button>
           )}
         </form>
 
         <p className="mt-8 text-center text-gray-400 text-sm">
-          {isRegistering ? 'Vous avez déjà un compte ?' : 'Nouveau sur BrokHomeTV ?'}
+          {isRegistering ? t.auth.haveAccount : t.auth.newToApp}
           <button 
             onClick={() => { setIsRegistering(!isRegistering); setError(''); }}
             className="ml-2 text-white font-bold hover:underline"
           >
-            {isRegistering ? 'Se connecter' : 'S\'inscrire maintenant'}
+            {isRegistering ? t.auth.connectBtn : t.auth.registerNow}
           </button>
         </p>
       </div>

@@ -194,6 +194,42 @@ Si vous appréciez mon travail, si vous souhaitez soutenir le projet ou m'offrir
 * **Twitch :** Venez me saluer de temps en temps en live sur [twitch.tv/brok_n_one](https://twitch.tv/brok_n_one) !
 
 ---
+
+## 🌐 Système d'Internationalisation (i18n) Géré par le Code
+BrokHomeTV prend en charge un système complet de traduction couvrant 12 langues majeures : **Français (FR), Anglais (EN), Espagnol (ES), Italien (IT), Allemand (DE), Portugais (PT), Néerlandais (NL), Polonais (PL), Turc (TR), Arabe (AR), Japonais (JA) et Coréen (KO)**.
+
+Pour conserver une interface épurée, semblable à celle de Netflix, aucun élément visuel (bouton, drapeau ou sélecteur) n'encombre l'écran. Tout est géré directement à la racine du projet.
+
+### ⚙️ Comment changer la langue de la plateforme
+Ouvrez le fichier `/locales.ts` à la racine de votre application et modifiez la variable globale de configuration supérieure `CURRENT_LANG` :
+
+```typescript
+// /locales.ts -> Ligne 11
+export const CURRENT_LANG: keyof typeof dictionary = 'FR'; // Remplacez par 'EN', 'ES', 'JA', etc.
+```
+
+Dès que vous modifiez ce code, l'ensemble de la plateforme (interface d'accueil, connexion, médiathèque, player, chat, rôles) s'actualise instantanément dans la langue sélectionnée pour tous vos utilisateurs.
+
+### 💻 Utilisation dans vos composants React (Développeurs)
+Pour ajouter de nouvelles clés ou traduire un composant, importez simplement le hook dynamique `useTranslation` de la façon suivante :
+
+```tsx
+import { useTranslation } from '../useTranslation';
+
+export const MonComposant = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div>
+      <h2>{t.global.welcome}</h2>
+      <button>{t.global.logout}</button>
+    </div>
+  );
+};
+```
+Tous les dictionnaires complets des 12 langues sont rangés de façon structurée et typée dans `/locales.ts`.
+
+---
 ---
 
 ## 🇬🇧 English Version
@@ -372,3 +408,39 @@ To share connection with close friends globally without modifying your home fire
 If you enjoy my work, want to support the project or buy me a coffee:
 * **PayPal:** [paypal.me/Taidana972](https://paypal.me/Taidana972)
 * **Twitch:** Say hello live on stream over on [twitch.tv/brok_n_one](https://twitch.tv/brok_n_one) !
+
+---
+
+## 🌐 Code-Managed Internationalization System (i18n)
+BrokHomeTV supports a global, fully-translated i18n system spanning 12 major languages: **French (FR), English (EN), Spanish (ES), Italian (IT), German (DE), Portuguese (PT), Dutch (NL), Polish (PL), Turkish (TR), Arabic (AR), Japanese (JA), and Korean (KO)**.
+
+To stay true to Netflix's premium minimalist interface design, there are no visual buttons, flags, or dropdown selectors cluttering the viewport. Everything is controlled directly within the codebase.
+
+### ⚙️ How to Switch the Platform Language
+Open the `/locales.ts` file situated at the root of your application and update the global configuration variable `CURRENT_LANG` at the top:
+
+```typescript
+// /locales.ts -> Line 11
+export const CURRENT_LANG: keyof typeof dictionary = 'EN'; // Replace with 'FR', 'ES', 'JA', etc.
+```
+
+Upon saving your changes, the entire platform (welcome view, login parameters, admin dashboard, video player, active socket rooms, chat labels, and role levels) instantly switches into chosen language.
+
+### 💻 Usage inside React Components (For Developers)
+To resolve localized strings or add new translation components, just import and call the dynamic `useTranslation` hook as shown below:
+
+```tsx
+import { useTranslation } from '../useTranslation';
+
+export const MyComponent = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div>
+      <h2>{t.global.welcome}</h2>
+      <button>{t.global.logout}</button>
+    </div>
+  );
+};
+```
+All typed dictionary structures for the 12 major languages are stored cleanly within `/locales.ts`.
